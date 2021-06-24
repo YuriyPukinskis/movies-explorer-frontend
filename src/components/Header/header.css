@@ -1,0 +1,85 @@
+.header{
+  width:100%;
+  max-width: 1280px;
+  height: 100%;
+  max-height:74px;
+  margin: 0 auto;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header_colored{
+  background-color: #073042;
+}
+
+.header__block{
+  display:none;
+}
+
+.header__block_visible{
+  display:flex;
+  flex-direction: row;
+}
+
+.header__logo {
+  margin-left: 70px;
+  width: 100%;
+  max-width: 38px;
+  height: 100%;
+  max-height: 38px;
+}
+
+.header__films{
+  width:100%;
+  max-width: 223px;
+  display: flex;
+  margin-right: 50px;;
+}
+
+.header__button{
+  background: none;
+  border: none;
+  width: min-content;
+  height: 22px;
+  white-space: nowrap;
+  margin-right: 70px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height, or 122% */
+
+  text-align: right;
+  cursor: pointer;
+
+  color: #FFFFFF;
+}
+
+.header__button_black{
+  margin-right: 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: black;
+}
+
+.header__button_grey{
+  background: #F5F5F5;
+  border-radius: 3px;
+}
+.header__button:hover{
+  opacity: 80%;
+}
+
+.header__button_green{
+  background: #2BE080;
+  border-radius: 3px;
+}
+

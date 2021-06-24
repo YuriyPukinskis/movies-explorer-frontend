@@ -1,0 +1,385 @@
+.main{
+  padding:0;
+  margin:0;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.main__promo{
+  background-color: #073042;
+  height: 100%;
+  max-height: 524px;
+  display:flex;
+  background-image: url(../../images/landing-logo.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.main__title{
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+
+  text-align: center;
+  /* letter-spacing: -0.04em; */
+
+  color: #FFFFFF;
+  width:100%;
+  max-width: 730px;
+  margin: 0 auto;
+  margin-top: 184px;
+  margin-bottom: 224px;
+}
+
+.main__navTab{
+  background-color: black;
+  height: 100%;
+  min-height: 66px;
+}
+
+.navTab__container{
+  display: flex;
+  justify-content: space-between;
+  margin:24px 502px;
+}
+
+.main__link{
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  /* or 123% */
+
+  display: flex;
+  align-items: center;
+  text-decoration-line: underline;
+
+  color: #FFFFFF;
+  transition: 3s;
+}
+
+.main__link:hover{
+  opacity: 80%;
+}
+
+.main__block{
+  width:100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+
+  color: #000000;
+  text-align: left;
+
+  border-bottom: 1px solid black;
+  margin-top: 110px;
+}
+
+.aboutProject__block{
+  display: flex;
+  width:100%;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.aboutProject__statement{
+  width: 100%;
+  max-width: 550px;
+  text-align: left;
+  margin-top:70px;
+}
+
+.main__techs{
+  background-color: #F5F5F5;
+}
+
+.techs__block{
+  width:100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+
+  color: #000000;
+  text-align: left;
+
+  border-bottom: 1px solid black;
+  margin-top: 100px;
+}
+
+.techs__title{
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  /* identical to box height, or 116% */
+
+  text-align: center;
+  letter-spacing: -0.04em;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 90px;
+  margin-bottom: 26px;
+}
+
+.techs__caption{
+  width:100%;
+  max-width:460px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  /* or 143% */
+
+  text-align: center;
+  letter-spacing: -0.04em;
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+
+.techs__container{
+  display: flex;
+  margin: 0 295px;
+  justify-content: space-between;
+  margin-bottom: 100px;
+}
+
+.techs__elem{
+  background: #E8E8E8;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 90px;
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.aboutMe__container{
+  display: flex;
+  width:100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  margin-top: 66px;
+  justify-content: space-between;
+  height:min-content;
+}
+
+.aboutMe__text{
+  text-align: left;
+  padding: 0;
+  height:min-content;
+}
+
+.aboutMe__name{
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+  margin:0;
+}
+
+.aboutMe__occupation{
+  margin:0;
+  margin-top: 18px;
+  margin-bottom: 26px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+.aboutMe__caption{
+  margin: 0;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 22px;
+  margin-bottom: 99px;
+}
+
+.aboutMe__links{
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.aboutMe__link{
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  text-decoration: none;
+  margin-right: 20px;
+  color: #000000;
+  transition: 3s;
+}
+
+.aboutMe__link:hover{
+  opacity: 80%;
+}
+
+.aboutMe__picture{
+  width:100%;
+  max-width: 270px;
+  height: 100%;
+  max-height: 327px;
+  border-radius: 10px;
+}
+
+.portfolio__block{
+  width:100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  text-align: left;
+  margin-top:100px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 20px;
+  color: #A0A0A0;
+
+  mix-blend-mode: normal;
+}
+
+.portfolio__elem{
+  width:100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #E6E6E6;
+  margin-bottom:31px;
+  text-decoration: none;
+  transition: 3s;
+}
+
+.portfolio__elem:hover{
+  opacity: 80%;
+}
+
+.portfolio__caption{
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 50px;
+ 
+  color: #000000;
+
+  letter-spacing: -0.04em;
+}
+
+.portfolio__img{
+  width:100%;
+  height:100%;
+  max-height: 29px;
+  max-width: 29px;
+}
+
+.aboutProject__line{
+  width:100%;
+  max-width: 1140px;
+  margin: 110px auto;
+  display: flex;
+  height: min-content;
+  justify-content: flex-start;
+}
+
+.aboutProject__first{
+  width: 20%;
+  max-width: 228px;
+  display: flex;
+  flex-direction: column;
+  height: min-content;
+}
+
+.aboutProject__greenBlock{
+  height:100%;
+  max-height: 36px;
+  background-color: #2BE080;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  margin:0;
+  padding:0;
+}
+
+.aboutProject__greenCaption{
+  margin:0;
+  padding:0;
+  height:100%;
+  max-height: 36px;
+  margin-top:14px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height, or 121% */
+  color: #A0A0A0;
+  text-align: center;
+}
+
+.aboutProject__second{
+  width: 80%;
+  max-width: 912px;
+  display: flex;
+  flex-direction: column;
+  height: min-content;
+}
+
+.aboutProject__greyBlock{
+  height:100%;
+  max-height: 36px;
+  background-color: #F2F2F2;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  margin:0;
+  padding:0;
+}
+
+.aboutProject__greyCaption{
+  margin:0;
+  padding:0;
+  margin-top:14px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height, or 121% */
+  color: #A0A0A0;
+  text-align: center;
+}

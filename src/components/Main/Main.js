@@ -4,7 +4,9 @@ import avatar from '../../images/avatar.jpg';
 
 export default function Main( props) {
   props.setIsMain(true);
-  props.setIsMovieOrProfile(false);
+  props.setIsProfile(false);
+  props.setIsSavedMovie(false);
+  props.setIsMovie(false);
   return (
     <div className={`main`}>
       <div className="main__promo">

@@ -5,6 +5,7 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  border:1px solid red;
 }
 
 .main__promo{
@@ -35,6 +36,14 @@
   margin-bottom: 224px;
 }
 
+@media screen and (max-width: 760px) {
+  .techs__title{
+    font-size: 31px;
+    line-height: 39px;
+    
+  }
+}
+
 .main__navTab{
   background-color: black;
   height: 100%;
@@ -44,14 +53,16 @@
 .navTab__container{
   display: flex;
   justify-content: space-between;
-  margin:24px 502px;
+  margin:24px auto;
+  width:100%;
+  max-width: 276px;
 }
 
 .main__link{
   font-family: Inter;
   font-style: normal;
   font-weight: 500;
-  font-size: 13px;
+  font-size: 11px;
   line-height: 16px;
   /* or 123% */
 
@@ -97,6 +108,17 @@
   max-width: 550px;
   text-align: left;
   margin-top:70px;
+}
+
+
+.aboutProject__subtitle{
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.aboutProject__text{
+  font-size: 14px;
+  line-height: 20px;
 }
 
 .main__techs{
@@ -156,9 +178,25 @@
 
 .techs__container{
   display: flex;
-  margin: 0 295px;
+  /* margin: 0 295px; */
+  width: 100%;
+  max-width: 690px;
+  margin:0 auto;
   justify-content: space-between;
   margin-bottom: 100px;
+}
+
+@media screen and (max-width: 760px) {
+  .techs__container{
+    display: grid;
+    grid-template-columns: repeat(2,max-content);
+    grid-template-rows: repeat(2, max-content);
+    column-gap: 10px;
+    row-gap: 10px;
+    margin: 0 auto;
+    border: 1px solid red;
+    max-width: 178px;
+  }
 }
 
 .techs__elem{
@@ -168,8 +206,19 @@
   max-width: 90px;
   min-height: 60px;
   display: flex;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  letter-spacing: -0.04em;
   flex-direction: column;
   justify-content: space-around;
+}
+
+@media screen and (max-width: 760px) {
+  .techs__elem{
+    width:84px;
+    height: 57px;
+  }
 }
 
 .aboutMe__container{
@@ -180,6 +229,13 @@
   margin-top: 66px;
   justify-content: space-between;
   height:min-content;
+}
+
+@media screen and (max-width: 760px) {
+  .aboutMe__container{
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }
 
 .aboutMe__text{
@@ -201,7 +257,7 @@
 .aboutMe__occupation{
   margin:0;
   margin-top: 18px;
-  margin-bottom: 26px;
+  margin-bottom: 20px;
   font-family: Inter;
   font-style: normal;
   font-weight: 500;
@@ -247,6 +303,24 @@
   height: 100%;
   max-height: 327px;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .aboutMe__picture{
+    width:100%;
+    max-width: 255px;
+    height: 100%;
+    max-height: 307px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .aboutMe__picture{
+    width:100%;
+    max-width: 292px;
+    height: 100%;
+    max-height: 352px;
+  }
 }
 
 .portfolio__block{

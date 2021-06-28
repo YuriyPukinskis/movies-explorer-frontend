@@ -12,8 +12,8 @@
   font-family: 'Inter', ‘Arial’, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
-  line-height: 22px;
+  font-size: 13px;
+  line-height: 16px;
   color:#A0A0A0;
   margin:0 auto;
   margin-top: 79px;
@@ -38,6 +38,8 @@
 .footer__year{
   padding: 0;
   margin: 0;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 .footer__links{

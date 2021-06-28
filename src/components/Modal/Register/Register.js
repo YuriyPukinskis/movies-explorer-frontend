@@ -8,7 +8,9 @@ export default function Register( props)  {
     props.onLoginClick(e)
   }
   props.setIsMain(false);
-  props.setIsMovieOrProfile(false);
+  props.setIsProfile(false);
+  props.setIsSavedMovie(false);
+  props.setIsMovie(false);
   
   return(
     <div className="register">

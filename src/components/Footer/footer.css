@@ -35,6 +35,23 @@
   height:min-content;
 }
 
+@media screen and (max-width: 768px) {
+  .footer__dateAndLinks {
+    max-width: 708px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer__dateAndLinks {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    height: 154px;
+  }
+}
+
+
+
 .footer__year{
   padding: 0;
   margin: 0;
@@ -49,6 +66,15 @@
   margin: 0;
   height:min-content;
   display: flex;
+}
+
+@media screen and (max-width: 320px) {
+  .footer__links {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 42px;
+  }
 }
 
 .footer__link{
@@ -67,9 +93,24 @@
   height:min-content;
 }
 
-@media screen and (max-width: 882px) {
+@media screen and (max-width: 320px) {
+  .footer__link {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
   .footer__text {
     font-size: 14px;
     line-height: 17px;
+    max-width: 708px;
+  }
+}
+
+@media screen and (max-width: 320x) {
+  .footer__text {
+    font-size: 12px;
+    line-height: 15px;
+    max-width: 300px;
   }
 }

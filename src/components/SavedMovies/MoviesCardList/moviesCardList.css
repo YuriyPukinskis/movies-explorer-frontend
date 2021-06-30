@@ -19,7 +19,7 @@
   }
 }
   
-@media screen and (max-width: 882px) {
+@media screen and (max-width: 768px) {
   .elements {
     grid-template-columns: repeat(2,max-content);
     grid-template-rows: repeat(6, max-content);
@@ -27,7 +27,7 @@
   }
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 320px) {
   .elements {
     grid-template-columns: repeat(1,max-content);
     grid-template-rows: repeat(6, max-content);
@@ -35,75 +35,96 @@
   }
 }
 
-.movies{
+.savedMovies{
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   
 }
 
-.movies__searchForm{
+.savedMovies__searchForm{
   width: 100%;
   max-width: 1140px;
   margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 
-@media screen and (max-width: 760px) {
-  .movies__searchForm{
+@media screen and (max-width: 320px) {
+  .savedMovies__searchForm{
     flex-direction: column;
   }
 }
 
-.movies__short{
+.savedMovies__short{
   display: flex;
   width:100%;
   max-width:178px;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding:0;
   margin:0;
-  margin-left: 19px;
+  margin-top:80px;
+  margin-bottom: 94px;
+  padding-left: 19px;
+  background: #F9F9F9;
+  border-top-right-radius: 9px;
+  border-bottom-right-radius: 9px;
 }
 
-.movies__icon{
+@media screen and (max-width: 320px) {
+  .savedMovies__short{
+    padding-left: 0;
+    border: none;
+    border-radius: 0;
+    background: white;
+  }
+}
+
+.savedMovies__icon{
   width:34px;
   height:34px;
 }
 
 @media screen and (max-width: 760px) {
-  .movies__icon{
+  .savedMovies__icon{
     display: none;
   }
 }
 
-.searchForm__elem{
+.searchFormSavedMovies__elem{
   width: 100%;
   max-width: 932px;
   border-right: 1px solid #CBCBCB;
   margin-top:80px;
   margin-bottom: 94px;
-  margin-left: 70px;
+  /* margin-left: 70px; */
   display: flex;
   align-items: center;
+  background: #F9F9F9;
+  border-top-left-radius: 9px;
+  border-bottom-left-radius: 9px;
 }
 
-@media screen and (max-width: 800px) {
-  .searchForm__elem{
+@media screen and (max-width: 768px) {
+  .searchFormSavedMovies__elem{
     max-width: 500px;
+    /* margin-left: 49px; */
   }
 }
 
-@media screen and (max-width: 760px) {
-  .searchForm__elem{
+@media screen and (max-width: 320px) {
+  .searchFormSavedMovies__elem{
     max-width: 300px;
+    border: none;
+    border-radius: 9px;
     margin: 0 auto;
   }
 }
 
 
-.searchForm__button{
+.searchFormSavedMovies__button{
   width: 34px;
   height: 34px;
   background-color: #3456F3;
@@ -116,14 +137,15 @@
 
 }
 
-.searchForm__input{
+.searchFormSavedMovies__input{
   width: 100%;
   max-width: 932px;
   border: none;
   margin:0 22px;
+  background: #F9F9F9;
 }
 
-.searchForm__caption{
+.searchFormSavedMovies__caption{
   width:100%;
   max-width: 117px;
   font-family: Inter;
@@ -135,29 +157,36 @@
   margin-right: 14px; */
 }
 
-.searchForm__label{
-  width: 100%;
+.searchFormSavedMovies__label{
+  width:400px;
   height:100%;
   max-width: 40px;
-  max-height: 36px;
+  height:min-content;
   display: block;
   position: relative;
+  align-content: center;
 }
 
-.searchForm__input2 + span{
+.searchFormSavedMovies__input2{
+  margin-top: 5px;
+}
+
+.searchFormSavedMovies__input2 + span{
   position: absolute;
   left:0; top:0;
   width: 100%;
-  height: 100%;
+  height: 36px;
   cursor: pointer;
   background: url("../../../images/smalltumboffslider.png") no-repeat; 
+  background-size: contain;
 }
 
-.searchForm__input2:checked + span{
+.searchFormSavedMovies__input2:checked + span{
   position: absolute;
   left:0; top:0;
   width: 100%;
   height: 100%;
   cursor: pointer;
   background: url("../../../images/smalltumbslider.png") no-repeat; 
+  background-size: contain;
 }

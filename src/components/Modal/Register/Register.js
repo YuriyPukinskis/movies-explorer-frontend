@@ -15,7 +15,7 @@ export default function Register( props)  {
   return(
     <div className="register">
       <p className="register__welcome">
-        Регистрация
+        Добро пожаловать!
       </p>
       <form className="register__form" onSubmit={toSignIn}>
         <input className="register__input" required id="name" name="name" placeholder="Имя" type="text" />

@@ -8,16 +8,16 @@ export default function MoviesCardList( props) {
   props.setIsSavedMovie(true);
   props.setIsMovie(false);
   return (
-    <div className={`movies ${props.isMoviesVisible?'movies_visible':''}`}>
-      <div className="movies__searchForm">
-          <div className="searchForm__elem">
-          <img src={icon} className='movies__icon' alt='Поиск' />
-            <input required id="movie"  className="searchForm__input" placeholder="Фильм" name="movie" type="text" />
-            <button className='searchForm__button' />
+    <div className={`savedMovies ${props.isMoviesVisible?'savedMovies_visible':''}`}>
+      <div className="savedMovies__searchForm">
+          <div className="searchFormSavedMovies__elem">
+          <img src={icon} className='savedMovies__icon' alt='Поиск' />
+            <input required id="movie"  className="searchFormSavedMovies__input" placeholder="Фильм" name="movie" type="text" />
+            <button className='searchFormSavedMovies__button' />
           </div>
-          <div className="movies__short">
-            <label className="searchForm__label"><input type="checkbox" value="1" name="slider"  className="searchForm__input2" /><span  className="searchForm__span"></span></label>
-            <p className="searchForm__caption">Короткометражки</p>
+          <div className="savedMovies__short">
+            <label className="searchFormSavedMovies__label"><input type="checkbox" value="1" name="slider"  className="searchFormSavedMovies__input2" /><span  className="searchFormSavedMovies__span"></span></label>
+            <p className="searchFormSavedMovies__caption">Короткометражки</p>
           </div>
       </div>
       <div className="preloader">

@@ -24,7 +24,7 @@ export default function Main( props) {
       <div className="main__aboutProject" id="about">
         <h2 className="main__block">О проекте</h2>
         <div className="aboutProject__block">
-          <div className="aboutProject__statement">
+          <div className="aboutProject__statement aboutProject__statement_first">
             <h3 className="aboutProject__subtitle">Дипломный проект включал 5 этапов</h3>
             <p className="aboutProject__text">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки</p>
           </div>
@@ -66,7 +66,7 @@ export default function Main( props) {
           <div className="aboutMe__text">
             <h3 className="aboutMe__name">Юрий</h3>
             <h4 className="aboutMe__occupation">Фронтенд-разработчик(?) 26 лет</h4>
-            <p className="aboutMe__caption">ТУТ МНОГАБУКАФ</p>
+            <p className="aboutMe__caption">Немного слов обо мне, чтоб проверить, верно ли работает перенос, ширина и прочие параметры</p>
             <div className="aboutMe__links">
               <a className="aboutMe__link" href="https://github.com/YuriyPukinskis?tab=repositories">GitHub</a>
             </div>

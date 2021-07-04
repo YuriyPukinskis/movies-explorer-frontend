@@ -19,7 +19,7 @@
   }
 }
   
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1057px) {
   .elements {
     grid-template-columns: repeat(2,max-content);
     grid-template-rows: repeat(6, max-content);
@@ -27,7 +27,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 689px) {
   .elements {
     grid-template-columns: repeat(1,max-content);
     grid-template-rows: repeat(6, max-content);
@@ -39,20 +39,30 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  
 }
 
 .movies__searchForm{
   width: 100%;
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  box-sizing: border-box;
+  padding:0 70px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 689px) {
+  .movies__searchForm {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 490px) {
+
   .movies__searchForm{
+    /* max-width: 262px; */
+    padding: 0 10px;
     flex-direction: column;
   }
 }
@@ -73,7 +83,7 @@
   border-bottom-right-radius: 9px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 490px) {
   .movies__short{
     padding-left: 0;
     border: none;
@@ -102,9 +112,11 @@
   /* margin-left: 70px; */
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: #F9F9F9;
   border-top-left-radius: 9px;
   border-bottom-left-radius: 9px;
+
 }
 
 @media screen and (max-width: 768px) {
@@ -114,15 +126,23 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 490px) {
   .searchForm__elem{
     max-width: 300px;
     border: none;
     border-radius: 9px;
     margin: 0 auto;
+    margin-top: 80px;
   }
 }
 
+.searchForm__subElem{
+  display:flex;
+  justify-content: space-between;
+
+  width: 100%;
+  max-width: 150px;
+}
 
 .searchForm__button{
   width: 34px;
@@ -134,14 +154,24 @@
   border: none;
   border-radius: 50%;
   margin: 7px 7px;
+  padding:0;
+
 }
 
 .searchForm__input{
   width: 100%;
-  max-width: 932px;
+  max-width: 300px;
   border: none;
   margin:0 22px;
   background: #F9F9F9;
+
+}
+
+@media screen and (max-width: 768px) {
+  .searchForm__input {
+    max-width: 150px;
+
+  }
 }
 
 .searchForm__caption{

@@ -11,8 +11,10 @@ export default function MoviesCardList( props) {
     <div className={`movies ${props.isMoviesVisible?'movies_visible':''}`}>
       <div className="movies__searchForm">
           <div className="searchForm__elem">
-            <img src={icon} className='movies__icon' alt='Поиск' />
-            <input required id="movie"  className="searchForm__input" placeholder="Фильм" name="movie" type="text" />
+            <div className="searchForm__subElem">
+              <img src={icon} className='movies__icon' alt='Поиск' />
+              <input required id="movie"  className="searchForm__input" placeholder="Фильм" name="movie" type="text" />
+            </div>
             <button className='searchForm__button' />
           </div>
           <div className="movies__short">

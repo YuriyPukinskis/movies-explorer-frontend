@@ -24,6 +24,7 @@ function App() {
   const [isSavedMovie,setIsSavedMovie]=useState(false);
   const [isProfile,setIsProfile]=useState(false);
   const isMovieOrProfile = isMovie || isSavedMovie || isProfile;
+  const isLoginOrRegister = !isMain && !isMovie && !isSavedMovie && !isProfile;
   const [isPopupOpen,setIsPopupOpen]=useState(false);
 
   if (movies.length === 0){
@@ -79,7 +80,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter history={history}>
-        <Header isMain={isMain} isMovie={isMovie} isSavedMovie={isSavedMovie} isMovieOrProfile={isMovieOrProfile} onRegisterClick={onRegisterClick} onLoginClick={onLoginClick} onMoviesClick={onMoviesClick} onSavedMoviesClick={onSavedMoviesClick} onProfileClick={onProfileClick} setIsPopupOpen={setIsPopupOpen}/>
+        <Header isLoginOrRegister={isLoginOrRegister} isMain={isMain} isMovie={isMovie} isSavedMovie={isSavedMovie} isMovieOrProfile={isMovieOrProfile} onRegisterClick={onRegisterClick} onLoginClick={onLoginClick} onMoviesClick={onMoviesClick} onSavedMoviesClick={onSavedMoviesClick} onProfileClick={onProfileClick} setIsPopupOpen={setIsPopupOpen}/>
         <Switch>
           <Route path="/sign-up">
             <Register onLoginClick={onLoginClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} />

@@ -73,6 +73,7 @@
   white-space: nowrap;
   overflow: hidden;
   height: min-content;
+  margin-left:12px;
 }
 
 .savedMovieCard__duration{
@@ -86,6 +87,6 @@
   line-height: 13px;
   display: flex;
   align-items: center;
-
+  margin-left: 12px;
   color: #A0A0A0;
 }

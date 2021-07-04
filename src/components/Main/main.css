@@ -35,7 +35,7 @@
   margin-bottom: 224px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
   .main__title{
     font-size: 31px;
     line-height: 39px;
@@ -86,45 +86,60 @@
 
 .main__block{
   width:100%;
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 0 auto;
+  
+  margin-top: 110px;
+}
+
+.main__caption{
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
   line-height: 27px;
   letter-spacing: -0.04em;
-
+  margin: 0 70px;
+  padding:0;
+  padding-bottom: 23px;
   color: #000000;
   text-align: left;
   border-bottom: 1px solid black;
-  margin-top: 110px;
 }
 
 @media screen and (max-width: 768px) {
-  .main__block{
-    max-width: 668px;
+  .main__caption{
+    margin: 0 50px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .main__block{
-    max-width: 284px;
+  .main__caption{
+    margin: 0 14px;
   }
 }
 
 .aboutProject__block{
   display: flex;
   width:100%;
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 0 auto;
   justify-content: space-between;
+  box-sizing: border-box;
+  padding:0 70px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 768px) {
+  .aboutProject__block{
+    padding:0 50px;
+  }
+}
+
+@media screen and (max-width: 400px) {
   .aboutProject__block{
     flex-direction: column;
     align-items: center;
+    padding:0;
   }
 }
 
@@ -135,16 +150,38 @@
   margin-top:70px;
 }
 
-@media screen and (max-width: 770px) {
+@media screen and (max-width: 1100px) {
   .aboutProject__statement{
     max-width: 319px;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 760px) {
   .aboutProject__statement{
     margin-top:56px;
     max-width: 284px;
+  }
+}
+
+.aboutProject__statement_first{
+  margin-right:40px;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutProject__statement_first{
+    margin-right:30px;
+  }
+} 
+
+@media screen and (max-width: 400px) {
+  .aboutProject__statement_first{
+    margin: 0;
+    margin-top:56px;
+  }
+  
+  .aboutProject__statement_second{
+    margin: 0;
+    margin-top:56px;
   }
 }
 
@@ -158,6 +195,9 @@
 }
 
 .aboutProject__text{
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
   font-size: 14px;
   line-height: 20px;
 }
@@ -168,31 +208,34 @@
 
 .techs__block{
   width:100%;
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 0 auto;
+  margin-top: 100px;
+}
+
+.techs__blockTitle{
+  margin: 0 70px;
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
   line-height: 27px;
   letter-spacing: -0.04em;
-
+  padding-bottom: 23px;
   color: #000000;
   text-align: left;
-
   border-bottom: 1px solid black;
-  margin-top: 100px;
 }
 
 @media screen and (max-width: 768px) {
-  .techs__block{
-    max-width: 668px;
+  .techs__blockTitle{
+    margin: 0 50px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .techs__block{
-    max-width: 284px;
+  .techs__blockTitle{
+    margin: 0 18px;
   }
 }
 
@@ -222,23 +265,39 @@
 
 .techs__caption{
   width:100%;
-  max-width:460px;
+  max-width:1280px;
+
+  margin: 0 auto;
+  margin-bottom: 100px;
+}
+
+.techs__text{
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 20px;
   /* or 143% */
-
+  padding: 0;
   text-align: center;
   letter-spacing: -0.04em;
-  margin: 0 auto;
-  margin-bottom: 100px;
+  margin:0 410px;
+}
+
+@media screen and (max-width: 1000px) {
+  .techs__text{
+    margin:0 154px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .techs__text{
+    margin:0 14px;
+  }
 }
 
 .techs__container{
   display: flex;
-  /* margin: 0 295px; */
   width: 100%;
   max-width: 690px;
   margin:0 auto;
@@ -283,7 +342,7 @@
 .aboutMe__container{
   display: flex;
   width:100%;
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 0 auto;
   margin-top: 66px;
   justify-content: space-between;
@@ -301,6 +360,19 @@
   text-align: left;
   padding: 0;
   height:min-content;
+  margin-left: 70px;
+}
+
+@media screen and (max-width: 768px) {
+  .aboutMe__text{
+    margin-left: 50px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .aboutMe__text{
+    margin: 0 14px;
+  }
 }
 
 .aboutMe__name{
@@ -362,6 +434,7 @@
   height: 100%;
   max-height: 327px;
   border-radius: 10px;
+  margin-right: 70px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -373,46 +446,78 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  .aboutMe__picture{
+    margin-right: 50px;
+  }
+}
+
 @media screen and (max-width: 760px) {
   .aboutMe__picture{
     width:100%;
     max-width: 292px;
     height: 100%;
     max-height: 352px;
+    margin:0;
   }
 }
 
 .portfolio__block{
   width:100%;
   max-width: 1140px;
-  margin: 0 auto;
-  text-align: left;
+  
   margin-top:100px;
+  
+}
+
+.portfolio__blockCaption{
+  margin: 0 70px;
+  text-align: left;
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 18px;
   line-height: 20px;
   color: #A0A0A0;
-
   mix-blend-mode: normal;
 }
 
 @media screen and (max-width: 768px) {
-  .portfolio__block{
-    max-width: 668px;
+  .portfolio__blockCaption{
+    margin: 0 50px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .portfolio__block{
-    max-width: 292px;
+  .portfolio__blockCaption{
+    margin: 0 14px;
+  }
+}
+.portfolio__container{
+  width:100%;
+  max-width:1280px;
+  margin:0 auto;
+  display:flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding:0 70px;
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio__container{
+    padding:0 50px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .portfolio__container{
+    padding:0 14px;
   }
 }
 
 .portfolio__elem{
   width:100%;
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -421,18 +526,6 @@
   margin-bottom:31px;
   text-decoration: none;
   transition: 3s;
-}
-
-@media screen and (max-width: 768px) {
-  .portfolio__elem{
-    max-width: 668px;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .portfolio__elem{
-    max-width: 292px;
-  }
 }
 
 .portfolio__elem:hover{
@@ -445,7 +538,6 @@
   font-weight: normal;
   font-size: 30px;
   line-height: 50px;
- 
   color: #000000;
 
   letter-spacing: -0.04em;
@@ -457,7 +549,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 495px) {
   .portfolio__caption{
     font-size: 18px;
     line-height: 28px;
@@ -469,26 +561,30 @@
   height:100%;
   max-height: 29px;
   max-width: 29px;
+
 }
 
 .aboutProject__line{
   width:100%;
-  max-width: 1140px;
+  max-width: 1280px;
   margin: 110px auto;
   display: flex;
   height: min-content;
   justify-content: flex-start;
+  box-sizing: border-box;
+  padding:0 70px;
+  /* border: 1px solid red */
 }
 
 @media screen and (max-width: 768px) {
   .aboutProject__line{
-    max-width: 668px;
+    padding: 0 50px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .aboutProject__line{
-    max-width: 284px;
+    padding: 0 18px;
   }
 }
 
@@ -513,15 +609,16 @@
 }
 
 .aboutProject__greenBlock{
-  height:100%;
-  max-height: 36px;
+  height: 36px;
   background-color: #2BE080;
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  text-align: center;
+  display:flex;
+  align-items: center;
+  justify-content: center;
   margin:0;
   padding:0;
 }
@@ -537,7 +634,6 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
-  /* identical to box height, or 121% */
   color: #A0A0A0;
   text-align: center;
 }
@@ -563,17 +659,18 @@
 }
 
 .aboutProject__greyBlock{
-  height:100%;
-  max-height: 36px;
+  height: 36px;
   background-color: #F2F2F2;
   font-family: Inter;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
   line-height: 17px;
-  text-align: center;
   margin:0;
   padding:0;
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .aboutProject__greyCaption{
@@ -585,7 +682,6 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
-  /* identical to box height, or 121% */
   color: #A0A0A0;
   text-align: center;
 }

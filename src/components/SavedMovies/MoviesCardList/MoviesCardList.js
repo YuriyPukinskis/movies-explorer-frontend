@@ -11,8 +11,10 @@ export default function MoviesCardList( props) {
     <div className={`savedMovies ${props.isMoviesVisible?'savedMovies_visible':''}`}>
       <div className="savedMovies__searchForm">
           <div className="searchFormSavedMovies__elem">
-          <img src={icon} className='savedMovies__icon' alt='Поиск' />
-            <input required id="movie"  className="searchFormSavedMovies__input" placeholder="Фильм" name="movie" type="text" />
+            <div className="searchFormSavedMovies__subElem">
+              <img src={icon} className='savedMovies__icon' alt='Поиск' />
+              <input required id="movie"  className="searchFormSavedMovies__input" placeholder="Фильм" name="movie" type="text" />
+            </div>
             <button className='searchFormSavedMovies__button' />
           </div>
           <div className="savedMovies__short">
@@ -26,7 +28,7 @@ export default function MoviesCardList( props) {
         </div>
       </div>
       {(props.movies.length!==0)?
-        <section className="elements">
+        <section className="savedMoviesElements">
           {Array.prototype.map.call(props.movies, function(item,index){
             return(
               <MovieCard key={item.movieId} movie={item} myId={props.myId} onMovieLike={props.onMovieLike}/>

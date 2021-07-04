@@ -10,13 +10,14 @@
   font-size: 24px;
   line-height: 29px;
   width:100%;
-  max-width: 358px;
+  max-width: 396px;
   margin: auto;
   text-align: left;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
   .login__welcome {
+    max-width: 260px;
     text-align: center;
   }
 }
@@ -50,17 +51,22 @@
 
 .login__input{
   margin: 0 auto;
-  
+  padding:0;
   /* margin-bottom: 29.74px; */
   font-family: 'Inter', ‘Arial’, sans-serif;
   width: 100%;
-  max-width: 358px;
+  max-width: 396px;
   color: black;
   border:none;
   padding-bottom: 10px;
   border-bottom: 1px solid #E8E8E8;
   margin-bottom: 30px;
-  
+}
+
+@media screen and (max-width: 400px) {
+  .login__input {
+    max-width:260px;
+  }
 }
 
 .login__form {
@@ -70,7 +76,7 @@
   margin-top: 40px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
   .login__form {
     width:100%;
     max-width:260px;
@@ -82,7 +88,7 @@
 .login__button-container{
   margin: auto;
   width: 100%;
-  max-width: 358px;
+  max-width: 396px;
   margin-top: 186px;
 
   font-family: Inter;
@@ -100,7 +106,7 @@
 .login__button{
   margin: auto;
   width: 100%;
-  max-width: 358px;
+  max-width: 396px;
   background-color: #3456F3;
 
   font-family: Inter;
@@ -113,11 +119,15 @@
   text-align: center;
 
   color: #FFFFFF;
-
-  height: 100%;
-  max-height: 45px;
+  height: 45px;
   border: none;
   border-radius: 2px;
   cursor: pointer;
   
+}
+
+@media screen and (max-width: 400px) {
+  .login__button {
+    max-width:260px;
+  }
 }

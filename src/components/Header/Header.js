@@ -31,7 +31,7 @@ export default function Header( props) {
 
   return (
     <header className={`header ${props.isMain?'header_colored':''}`}>
-      <div className ='header__section'>
+      <div className ={`header__section ${props.isLoginOrRegister?'header__section_repositioned':''}`}>
         <img className="header__logo" src={logo} alt="Логотип" />
         <div className={`header__block ${props.isMovieOrProfile?'header__block_visible':''} header__block_invisible`}>
           <div className="header__films header__hiding">

@@ -29,6 +29,12 @@
   justify-content: space-between;
 }
 
+@media screen and (max-width: 420px) {
+  .profile__line {
+    max-width:260px;
+  }
+}
+
 .profile__line_first{
   border-bottom: 1px solid #E8E8E8;
 }

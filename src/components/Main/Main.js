@@ -22,13 +22,13 @@ export default function Main( props) {
       </div>
 
       <div className="main__aboutProject" id="about">
-        <h2 className="main__block">О проекте</h2>
+        <h2 className="main__block"><p className='main__caption'>О проекте</p></h2>
         <div className="aboutProject__block">
           <div className="aboutProject__statement aboutProject__statement_first">
             <h3 className="aboutProject__subtitle">Дипломный проект включал 5 этапов</h3>
             <p className="aboutProject__text">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки</p>
           </div>
-          <div className="aboutProject__statement">
+          <div className="aboutProject__statement aboutProject__statement_second">
             <h3 className="aboutProject__subtitle">На выполнение диплома ушло 5 недель</h3>
             <p className="aboutProject__text">У каждого этапа был мягкий и жесткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
           </div>
@@ -46,9 +46,9 @@ export default function Main( props) {
       </div>
 
       <div className="main__techs" id="tech">
-        <h2 className="techs__block">Технологии</h2>
+        <h2 className="techs__block"><p className='techs__blockTitle'>Технологии</p></h2>
         <p className="techs__title">7 технологий</p>
-        <p className="techs__caption">На курсе веб-разраболтки мы освоили технологии, которые применили в дипломном проекте.</p>
+        <div className="techs__caption"><p className='techs__text'>На курсе веб-разраболтки мы освоили технологии, которые применили в дипломном проекте.</p></div>
         <div className="techs__container">
           <p className="techs__elem">HTML</p>
           <p className="techs__elem">CSS</p>
@@ -61,7 +61,7 @@ export default function Main( props) {
       </div>
 
       <div className="main__aboutMe" id="student">
-        <h2 className="main__block">Студент</h2>
+        <h2 className="main__block"><p className='main__caption'>Студент</p></h2>
         <div className="aboutMe__container">
           <div className="aboutMe__text">
             <h3 className="aboutMe__name">Юрий</h3>
@@ -76,7 +76,7 @@ export default function Main( props) {
       </div>
 
       <div className="main__portfolio">
-        <h2 className="portfolio__block">Портфолио</h2>
+        <h2 className="portfolio__block"><p className='portfolio__blockCaption'>Портфолио</p></h2>
         <div className="portfolio__container">
           <a className="portfolio__elem" href="https://github.com/YuriyPukinskis?tab=repositories">
             <p className="portfolio__caption">Статичный сайт</p>

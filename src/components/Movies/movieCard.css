@@ -14,16 +14,17 @@
 .element__button{
   background: none;
   border: none;
-  background: url("../../images/like1.png") no-repeat;
-  background-size: contain;
-  height: 22px;
+  height: 16px;
   width: 100%;
-  max-width: 20.76px; 
+  max-width: 16px; 
   padding:0;
   margin:0;
   align-items: center;
   transition: 3s;
   cursor: pointer;
+  background: #F9F9F9;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.09);
+  border-radius: 50px;
 }
 
 .element__button:hover{
@@ -31,7 +32,8 @@
 }
 
 .element__button_liked{
-  background: url('../../images/like.png') center no-repeat;
+  background-position: center;
+  background: #2BE080
 }
 
 .element__caption{
@@ -80,6 +82,7 @@
   white-space: nowrap;
   overflow: hidden;
   height: min-content;
+  margin-left: 12px;
 }
 
 .element__duration{
@@ -93,6 +96,6 @@
   line-height: 13px;
   display: flex;
   align-items: center;
-
+  margin-left: 12px;
   color: #A0A0A0;
 }

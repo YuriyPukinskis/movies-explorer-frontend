@@ -1,25 +1,34 @@
 import React from 'react';
 import MovieCard from '../MoviesCard/MovieCard';
+import icon from '../../../images/icon.png'
 
 export default function MoviesCardList( props) {
   props.setIsMain(false);
-  props.setIsMovieOrProfile(true);
+  props.setIsProfile(false);
+  props.setIsSavedMovie(true);
+  props.setIsMovie(false);
   return (
-    <div className={`movies ${props.isMoviesVisible?'movies_visible':''}`}>
-      <div className="movies__searchForm">
-          <div className="searchForm__elem">
-            <input required id="movie"  className="searchForm__input" placeholder="Фильм" name="movie" type="text" />
-            <button className='searchForm__button' />
+    <div className={`savedMovies ${props.isMoviesVisible?'savedMovies_visible':''}`}>
+      <div className="savedMovies__searchForm">
+          <div className="searchFormSavedMovies__elem">
+            <div className="searchFormSavedMovies__subElem">
+              <img src={icon} className='savedMovies__icon' alt='Поиск' />
+              <input required id="movie"  className="searchFormSavedMovies__input" placeholder="Фильм" name="movie" type="text" />
+            </div>
+            <button className='searchFormSavedMovies__button' />
           </div>
-          <p className="searchForm__caption">Короткометражки</p>
+          <div className="savedMovies__short">
+            <label className="searchFormSavedMovies__label"><input type="checkbox" value="1" name="slider"  className="searchFormSavedMovies__input2" /><span  className="searchFormSavedMovies__span"></span></label>
+            <p className="searchFormSavedMovies__caption">Короткометражки</p>
+          </div>
       </div>
       <div className="preloader">
         <div className="preloader__container">
           <span className="preloader__round"></span>
         </div>
-        </div>
+      </div>
       {(props.movies.length!==0)?
-        <section className="elements">
+        <section className="savedMoviesElements">
           {Array.prototype.map.call(props.movies, function(item,index){
             return(
               <MovieCard key={item.movieId} movie={item} myId={props.myId} onMovieLike={props.onMovieLike}/>

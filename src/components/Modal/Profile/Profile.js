@@ -7,7 +7,9 @@ export default function Profile( props)  {
   }
   const userName='Виталий';
   props.setIsMain(false);
-  props.setIsMovieOrProfile(false);
+  props.setIsProfile(true);
+  props.setIsSavedMovie(false);
+  props.setIsMovie(false);
   return(
     <div className="profile">
       <p className="profile__greet">Привет, {userName}!</p>

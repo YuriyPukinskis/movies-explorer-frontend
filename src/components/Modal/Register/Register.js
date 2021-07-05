@@ -8,12 +8,14 @@ export default function Register( props)  {
     props.onLoginClick(e)
   }
   props.setIsMain(false);
-  props.setIsMovieOrProfile(false);
+  props.setIsProfile(false);
+  props.setIsSavedMovie(false);
+  props.setIsMovie(false);
   
   return(
     <div className="register">
       <p className="register__welcome">
-        Регистрация
+        Добро пожаловать!
       </p>
       <form className="register__form" onSubmit={toSignIn}>
         <input className="register__input" required id="name" name="name" placeholder="Имя" type="text" />

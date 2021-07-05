@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 
 export default function Login (props) {
   props.setIsMain(false);
-  props.setIsMovieOrProfile(false);
+  props.setIsProfile(false);
+  props.setIsSavedMovie(false);
+  props.setIsMovie(false);
   function handleSubmit(e){
     e.preventDefault();
     props.onMoviesClick();

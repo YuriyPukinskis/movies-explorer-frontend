@@ -6,6 +6,8 @@
 @import url('./components/Main/main.css');
 @import url('./components/Movies/moviesCardList.css');
 @import url('./components/Movies/movieCard.css');
+@import url('./components/SavedMovies/MoviesCardList/moviesCardList.css');
+@import url('./components/SavedMovies/MoviesCard/movieCard.css');
 @import url('./components/Modal/Login/login.css');
 @import url('./components/Modal/Register/register.css');
 @import url('./components/404/notFound.css');

@@ -221,3 +221,12 @@
   background-size: contain;
 }
 
+.savedMovies__button{
+  border:none;
+  margin-top:61px;
+  background-color: white;
+}
+
+.savedMovies__button_hidden{
+  display: none;
+}

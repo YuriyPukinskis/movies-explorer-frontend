@@ -11,13 +11,21 @@ export default function Register( props)  {
   props.setIsProfile(false);
   props.setIsSavedMovie(false);
   props.setIsMovie(false);
+
+  function handleSubmit(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    props.handleRegister(name,password,email);
+  }
   
   return(
     <div className="register">
       <p className="register__welcome">
         Добро пожаловать!
       </p>
-      <form className="register__form" onSubmit={toSignIn}>
+      <form className="register__form" onSubmit={handleSubmit}>
         <input className="register__input" required id="name" name="name" placeholder="Имя" type="text" />
         <input className="register__input" required id="email" name="email" placeholder="Email" type="text" />
         <input className="register__input" required id="password" name="password" placeholder="Пароль" type="password" />

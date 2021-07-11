@@ -9,14 +9,24 @@ import Register from '../Modal/Register/Register';
 import Profile from '../Modal/Profile/Profile';
 import NotFound from '../404/NotFound';
 import { useState } from 'react';
-import { createBrowserHistory } from 'history';
-import { BrowserRouter, Route, Switch} from 'react-router-dom';
+import { useEffect } from 'react';
+import { Route, Switch, useHistory} from 'react-router';
+import * as auth from '../../utils/auth';
 import close from '../../images/close.png';
 import account from '../../images/account.png';
-export const history = createBrowserHistory()
-
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import {mainApi} from '../../utils/MainApi';
+import {moviesApi} from '../../utils/MoviesApi';
 
 function App() {
+
+  window.addEventListener('load', () => { 
+    const preloader = document.querySelector('.prePreloader') 
+    preloader.classList.add('prePreloader_hidden') 
+  })
+
+  const history=useHistory();
+  const [currentUser, setCurrentUser] = useState({name:'',_id:''});
   const [movies,setMovies]=useState([]);
   const [savedMovies,setSavedMovies]=useState([]);
   const [isMain,setIsMain]=useState(false);
@@ -26,23 +36,67 @@ function App() {
   const isMovieOrProfile = isMovie || isSavedMovie || isProfile;
   const isLoginOrRegister = !isMain && !isMovie && !isSavedMovie && !isProfile;
   const [isPopupOpen,setIsPopupOpen]=useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  
 
-  if (movies.length === 0){
-    setMovies([{name:'namen',link:'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1Rk3xj3SNsykl6tc1aFKIVZ6aaKTM5SRkZCeTgDn6uOyic',numberOfLikes:0,cardId:'111',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},
-      {name:'namen1',link:'https://sun6-22.userapi.com/impf/zlJwszlG77CnUNz8gAw-1WqJpVU3tnQiBwOo_Q/HbJXFyynflI.jpg?size=1280x800&quality=96&sign=55da32cf936194b1fd6a61f45788c0bb&c_uniq_tag=6r89xpKgaNM1LgQER524ZhLDZevDD0GVGrrDIGkje-s&type=album',numberOfLikes:0,cardId:'112',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},
-      {name:'namen1',link:'https://sun9-26.userapi.com/impg/xUMdNvbr5Cq6AVwMjODCxHfZqd3p7BZ4y5HIDA/5V3oYbt5GGw.jpg?size=270x151&quality=96&sign=38d12eaa1f513a4b22c5cebadee29bbd&type=album',numberOfLikes:0,cardId:'112',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},
-      {name:'namen1',link:'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1Rk3xj3SNsykl6tc1aFKIVZ6aaKTM5SRkZCeTgDn6uOyic',numberOfLikes:0,cardId:'112',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},
-      {name:'namen1',link:'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1Rk3xj3SNsykl6tc1aFKIVZ6aaKTM5SRkZCeTgDn6uOyic',numberOfLikes:0,cardId:'112',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},
-      {name:'namen1',link:'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1Rk3xj3SNsykl6tc1aFKIVZ6aaKTM5SRkZCeTgDn6uOyic',numberOfLikes:0,cardId:'112',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},
-      {name:'namen1',link:'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1Rk3xj3SNsykl6tc1aFKIVZ6aaKTM5SRkZCeTgDn6uOyic',numberOfLikes:0,cardId:'112',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},])
+  function handleFailedLogin(){
+    alert('Что-то пошло не так! Попробуйте еще раз.')
   }
-  if (savedMovies.length === 0){
-    setSavedMovies([{name:'namen',link:'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1Rk3xj3SNsykl6tc1aFKIVZ6aaKTM5SRkZCeTgDn6uOyic',numberOfLikes:0,cardId:'111',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},
-      {name:'namen1',link:'https://sun6-22.userapi.com/impf/zlJwszlG77CnUNz8gAw-1WqJpVU3tnQiBwOo_Q/HbJXFyynflI.jpg?size=1280x800&quality=96&sign=55da32cf936194b1fd6a61f45788c0bb&c_uniq_tag=6r89xpKgaNM1LgQER524ZhLDZevDD0GVGrrDIGkje-s&type=album',numberOfLikes:0,cardId:'112',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},
-      {name:'namen1',link:'https://sun9-26.userapi.com/impg/xUMdNvbr5Cq6AVwMjODCxHfZqd3p7BZ4y5HIDA/5V3oYbt5GGw.jpg?size=270x151&quality=96&sign=38d12eaa1f513a4b22c5cebadee29bbd&type=album',numberOfLikes:0,cardId:'112',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},
-      {name:'namen1',link:'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1Rk3xj3SNsykl6tc1aFKIVZ6aaKTM5SRkZCeTgDn6uOyic',numberOfLikes:0,cardId:'112',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},
-      {name:'namen1',link:'https://i.mycdn.me/i?r=AzEPZsRbOZEKgBhR0XGMT1Rk3xj3SNsykl6tc1aFKIVZ6aaKTM5SRkZCeTgDn6uOyic',numberOfLikes:0,cardId:'112',elementLikes:[],ownerID:'2222',likes:[],length:'1ч 42м'},])
+
+  function handleLogin (email, password){
+    auth.authorize(email, password, handleFailedLogin)
+    .then((data) => {
+      console.log(data)
+      if (data.token){
+        setLoggedIn(true)
+        // alert('log' + loggedIn)
+        history.push('/movies');
+        // history.go();
+      }
+    })  
+    .catch(err => console.log(err));
   }
+
+  useEffect(() => {
+    checkToken();
+    mainApi.initProfileFomServer()
+      .then(function(res){
+        setCurrentUser(res);
+      })
+      .catch((err) => {
+        console.log(err); 
+      });
+      if (savedMovies.length===0){
+        mainApi.getInitialCards()
+          .then(function(res){
+            const movie=[]
+            res.forEach(element => {
+              // alert(JSON.stringify(element))
+              // if(element.owner === currentUser._id)
+              movie.push(prepareSavedMovies(element))
+            })
+            setSavedMovies(movie) 
+            })
+          .catch((err) => {
+            console.log(err); 
+          });
+      }
+      
+      if (movies.length===0){
+        moviesApi.getInitialCards()
+          .then(function(res){
+            const movie=[]
+            res.forEach(element => {
+              movie.push(prepareMovies(element))
+            })
+            setMovies(movie) 
+            })
+          .catch((err) => {
+            console.log(err); 
+          });
+      }      
+  }, [null])
+
 
 
   
@@ -56,17 +110,18 @@ function App() {
   }
   function onMoviesClick(){
     history.push('/movies');
-    history.go();
+    // history.go();
   }
   function onSavedMoviesClick(){
     history.push('/saved-movies');
-    history.go();
+    // history.go();
   }
   function onProfileClick(){
     history.push('/profile');
-    history.go();
+    // history.go();
   }
   function onLogOutClick(){
+    delete localStorage.token;
     history.push('/');
     history.go();
   }
@@ -77,26 +132,173 @@ function App() {
     setIsPopupOpen(false);
   }
 
+  function handleRegister(name,password,email){
+    auth.register(name,  password, email).then((res) => {
+      if(res){
+          alert('Вы успешно зарегистрировались, ' + name)
+          history.push('/sign-in');
+      } else {
+        alert('Something gone wrong')
+      }
+    })
+    .catch(err => console.log(err));
+  }
+
+  function checkToken () {
+    const token = localStorage.getItem('token');
+    if (token){
+      auth.getContent(token).then((res) => {
+        if (res){
+          setLoggedIn(true)
+          
+        };
+      })
+      .catch((err) => {
+        console.log(err); 
+      });
+    }    
+  }
+
+  function handleUpdateUser(name, email) {
+    mainApi.postLoginToServer(name, email)
+      .then((updatedUser)=>{
+        alert('Профиль успешно обновлен! Привет, '+ updatedUser.data);
+      })
+      .catch((err) => {
+        console.log(err); 
+      });
+  }
+
+  function prepareMovies(newCard){
+    const country = newCard.country;
+    const director = newCard.director;
+    const duration = newCard.duration;
+    const year = newCard.year;
+    const description = newCard.description;
+    const image = newCard.image;
+    const trailer = newCard.trailerLink;
+    const thumbnail = newCard.image.formats.thumbnail;
+    const id = newCard.id;
+    const nameRU = newCard.nameRU;
+    const nameEN = newCard.nameEN;
+    const ownerID = newCard.owner;
+    return {country, director, duration, year, description, image, trailer,thumbnail, id, nameRU, nameEN,ownerID}
+  }
+
+  function prepareSavedMovies(newCard){
+    const country = newCard.country;
+    const director = newCard.director;
+    const duration = newCard.duration;
+    const year = newCard.year;
+    const description = newCard.description;
+    const image = newCard.image;
+    const trailer = newCard.trailer;
+    const thumbnail = newCard.thumbnail;
+    const _id = newCard._id;
+    const movieId = newCard.movieId;
+    const nameRU = newCard.nameRU;
+    const nameEN = newCard.nameEN;
+    const ownerID = newCard.owner;
+    return {country, director, duration, year, description, image, trailer,thumbnail, _id, movieId, nameRU, nameEN,ownerID}
+  }
+
+  function handleApploadCard(data) {
+
+    mainApi.postCardToServer(data)  
+      .catch((err) => {
+        console.log(err); 
+      });
+      reMakeSavedMovies()
+  }
+
+  function handleCardDelete(card) {
+    mainApi.deleteCardFromServer(card._id)
+    .then(() => {
+      const newCards = savedMovies.filter((c) => c._id !== card._id);
+      setSavedMovies(newCards);
+    })
+    .catch((err) => {
+      console.log(err); 
+    });
+  } 
+
+  function searchMovie(text) {
+    const newCards = movies.filter((c) => c.nameRU === text);
+    setMovies(newCards);
+  }
+
+
+  function showShortMeterMovies(){
+    const newCards = movies.filter((c) => c.duration <= 40);
+    setMovies(newCards);
+  }
+
+  function reMakeMovies(){
+    moviesApi.getInitialCards()
+      .then(function(res){
+        const movie=[]
+        res.forEach(element => {
+          movie.push(prepareMovies(element))
+        })
+        setMovies(movie) 
+      })
+      .catch((err) => {
+        console.log(err); 
+      });
+  }
+
+  function searchSavedMovie(text) {
+    const newCards = savedMovies.filter((c) => c.nameRU === text);
+    setSavedMovies(newCards);
+  }
+
+  function showShortMeterSavedMovies(){
+    const newCards = savedMovies.filter((c) => c.duration <= 40);
+    setSavedMovies(newCards);
+  }
+
+  function reMakeSavedMovies(){
+    mainApi.getInitialCards()
+      .then(function(res){
+        const movie=[]
+        res.forEach(element => {
+          movie.push(prepareSavedMovies(element))
+        })
+        setSavedMovies(movie) 
+      })
+      .catch((err) => {
+        console.log(err); 
+      });
+  }
   return (
     <div className="App">
-      <BrowserRouter history={history}>
+        <div className='prePreloader'>
+          <div className="preloader">
+              <div className="preloader__container">
+                  <span className="preloader__round"></span>
+              </div>
+          </div>
+        </div>
         <Header isLoginOrRegister={isLoginOrRegister} isMain={isMain} isMovie={isMovie} isSavedMovie={isSavedMovie} isMovieOrProfile={isMovieOrProfile} onRegisterClick={onRegisterClick} onLoginClick={onLoginClick} onMoviesClick={onMoviesClick} onSavedMoviesClick={onSavedMoviesClick} onProfileClick={onProfileClick} setIsPopupOpen={setIsPopupOpen}/>
         <Switch>
           <Route path="/sign-up">
-            <Register onLoginClick={onLoginClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} />
+            <Register onLoginClick={onLoginClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleRegister={handleRegister} />
           </Route>
           <Route path="/sign-in">
-            < Login onMoviesClick={onMoviesClick} onRegisterClick={onRegisterClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} />
+            < Login onRegisterClick={onRegisterClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleLogin={handleLogin} />
           </Route>
-          <Route path="/movies">
-            <MoviesCardList movies={movies} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile}/>
-          </Route>
-          <Route path="/saved-movies">
-            <SavedMoviesCardList movies={savedMovies} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} />
-          </Route>
-          <Route path="/profile">
-            <Profile onLogOutClick={onLogOutClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} />
-          </Route>
+          <ProtectedRoute path="/movies" loggedIn={loggedIn} 
+            component={()=>(<MoviesCardList savedMovies={savedMovies} setMovies={setMovies} reMakeMovies={reMakeMovies} movies={movies} showShortMeter={showShortMeterMovies} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleApploadCard={handleApploadCard} handleCardDelete={handleCardDelete} searchMovie={searchMovie}/>)} />
+          <ProtectedRoute path="/saved-movies" loggedIn={loggedIn} 
+            component={()=>(<SavedMoviesCardList reMakeSavedMovies={reMakeSavedMovies} showShortMeter={showShortMeterSavedMovies} searchSavedMovie={searchSavedMovie} movies={savedMovies}setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleCardDelete={handleCardDelete} />)} />
+          {/* <Route path="/saved-movies">
+            <SavedMoviesCardList movies={savedMovies}setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleCardDelete={handleCardDelete} />
+          </Route> */}
+          <ProtectedRoute path="/profile" loggedIn={loggedIn} 
+            component={()=>(<Profile onLogOutClick={onLogOutClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleUpdateUser={handleUpdateUser} />)} />
+          {/* <Route path="/profile">
+            <Profile onLogOutClick={onLogOutClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleUpdateUser={handleUpdateUser} />
+          </Route> */}
           <Route exact path="/">
             <Main setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} />
           </Route>
@@ -119,7 +321,6 @@ function App() {
             <button id="utton" type='button' onClick={onProfileClick} className="popup__button popup__button_account"> Аккаунт <img className="header__accountArt" src={account} alt="Аккаунт"/></button>
           </div>
         </div>
-      </BrowserRouter>
     </div>
   );
 }

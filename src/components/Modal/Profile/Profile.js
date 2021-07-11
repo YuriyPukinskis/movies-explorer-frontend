@@ -3,7 +3,9 @@ export default function Profile( props)  {
     props.onLogOutClick();
   }
   function onChangeProfile(){
-    
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    props.handleUpdateUser(name, email)
   }
   const userName='Виталий';
   props.setIsMain(false);

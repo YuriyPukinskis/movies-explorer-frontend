@@ -7,9 +7,13 @@ export default function Login (props) {
   props.setIsProfile(false);
   props.setIsSavedMovie(false);
   props.setIsMovie(false);
+
   function handleSubmit(e){
     e.preventDefault();
-    props.onMoviesClick();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+   
+    props.handleLogin(email, password);
   }
   function toSignUp(){
     props.onRegisterClick()

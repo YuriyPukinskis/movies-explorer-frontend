@@ -3,7 +3,10 @@ export default function NotFound( props)  {
     props.onNotFound();
   }
   props.setIsMain(false);
-  props.setIsMovieOrProfile(false);
+  props.setIsProfile(false);
+  props.setIsSavedMovie(false);
+  props.setIsMovie(false);
+  props.setIsLoggedMain(false);
   return(
     <div className="notFound">
       <p className="notFound__number">404</p>

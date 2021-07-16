@@ -17,7 +17,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && scp -r ./build/* praktikum@130.193.48.163:/home/diplomfrontend"
+    "deploy": "npm run build && scp -r ./build/* praktikum-diplom@130.193.48.163:/home/praktikum-diplom/diplom/frontend"
   },
   "eslintConfig": {
     "extends": [

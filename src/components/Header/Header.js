@@ -2,9 +2,10 @@ import logo from '../../images/logo.png';
 import account from '../../images/account.png';
 import menu from '../../images/menu.png';
 import React from 'react';
+import {CurrentUserContext} from'../../context/CurrentUserContext';
 
 export default function Header( props) {
-
+  const currentUser = React.useContext(CurrentUserContext);
   function handleRegisterClick(){
     props.onRegisterClick();
   }
@@ -40,7 +41,7 @@ export default function Header( props) {
           </div>
         </div>
       </div>
-      <div className={`header__block ${props.isMain?'header__block_visible':''} `}>
+      <div className={`header__block ${(props.isMain&&!props.isLoggedMain)?'header__block_visible':''} `}>
         <button id="utton" type='button' onClick={handleRegisterClick} className="header__button header__button_register"> Регистрация </button>
         <button id="utton" type='button' onClick={handleLoginClick} className="header__button header__button_login"> Войти </button>
       </div>

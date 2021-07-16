@@ -155,7 +155,7 @@
   border-radius: 50%;
   margin: 7px 7px;
   padding:0;
-
+  cursor: pointer;
 }
 
 .searchForm__input{
@@ -218,4 +218,14 @@
   cursor: pointer;
   background: url("../../images/smalltumbslider.png") no-repeat; 
   background-size: contain;
+}
+
+.movies__button{
+  border:none;
+  margin-top:61px;
+  background-color: white;
+}
+
+.movies__button_hidden{
+  display: none;
 }

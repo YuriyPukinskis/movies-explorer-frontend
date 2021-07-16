@@ -99,3 +99,8 @@
   margin-left: 12px;
   color: #A0A0A0;
 }
+
+.element__link{
+  margin: 0;
+  padding: 0;
+}

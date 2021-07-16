@@ -11,7 +11,7 @@ export default function Register( props)  {
   props.setIsProfile(false);
   props.setIsSavedMovie(false);
   props.setIsMovie(false);
-
+  props.setIsLoggedMain(false)
   function handleSubmit(e){
     e.preventDefault();
     const name = document.getElementById('name').value;
@@ -25,12 +25,15 @@ export default function Register( props)  {
       <p className="register__welcome">
         Добро пожаловать!
       </p>
-      <form className="register__form" onSubmit={handleSubmit}>
-        <input className="register__input" required id="name" name="name" placeholder="Имя" type="text" />
-        <input className="register__input" required id="email" name="email" placeholder="Email" type="text" />
-        <input className="register__input" required id="password" name="password" placeholder="Пароль" type="password" />
+      <form className="form register__form" onSubmit={handleSubmit}>
+        <input className="form__input register__input" required id="name" name="name" placeholder="Имя" type="text" />
+        <span class="name-error form__input-error"></span>
+        <input className="form__input register__input" required id="email" name="email" placeholder="Email" type="email" />
+        <span class="email-error form__input-error"></span>
+        <input className="form__input register__input" required id="password" name="password" placeholder="Пароль" type="password" />
+        <span class="password-error form__input-error"></span>
         <div className="register__button-container">
-          <button type="submit" className="register__button">Зарегистрироваться</button>
+          <button type="submit" className="form__submit register__button">Зарегистрироваться</button>
         </div>
       </form>
       <div className="register__signup">

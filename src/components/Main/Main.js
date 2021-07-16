@@ -1,12 +1,23 @@
 import React from 'react';
 import arrow from '../../images/arrow.png';
 import avatar from '../../images/avatar.jpg';
+import {CurrentUserContext} from'../../context/CurrentUserContext';
 
 export default function Main( props) {
+  const currentUser = React.useContext(CurrentUserContext);
   props.setIsMain(true);
   props.setIsProfile(false);
   props.setIsSavedMovie(false);
   props.setIsMovie(false);
+  props.setIsLoggedMain(false)
+
+  if(localStorage.getItem('loggIn')){
+    props.setIsMain(true);
+    props.setIsProfile(false);
+    props.setIsSavedMovie(false);
+    props.setIsMovie(true);
+    props.setIsLoggedMain(true)
+  }
   return (
     <div className={`main`}>
       <div className="main__promo">

@@ -17,6 +17,7 @@ import account from '../../images/account.png';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import {mainApi} from '../../utils/MainApi';
 import {moviesApi} from '../../utils/MoviesApi';
+import {CurrentUserContext} from'../../context/CurrentUserContext';
 
 function App() {
 
@@ -26,13 +27,14 @@ function App() {
   })
 
   const history=useHistory();
-  const [currentUser, setCurrentUser] = useState({name:'',_id:''});
+  const [currentUser, setCurrentUser] = useState({name:'',_id:'',email:''});
   const [movies,setMovies]=useState([]);
   const [savedMovies,setSavedMovies]=useState([]);
   const [isMain,setIsMain]=useState(false);
   const [isMovie,setIsMovie]=useState(false);
   const [isSavedMovie,setIsSavedMovie]=useState(false);
   const [isProfile,setIsProfile]=useState(false);
+  const [isLoggedMain,setIsLoggedMain]=useState(false);
   const isMovieOrProfile = isMovie || isSavedMovie || isProfile;
   const isLoginOrRegister = !isMain && !isMovie && !isSavedMovie && !isProfile;
   const [isPopupOpen,setIsPopupOpen]=useState(false);
@@ -49,9 +51,8 @@ function App() {
       console.log(data)
       if (data.token){
         setLoggedIn(true)
-        // alert('log' + loggedIn)
+        localStorage.setItem('loggIn',true);
         history.push('/movies');
-        // history.go();
       }
     })  
     .catch(err => console.log(err));
@@ -70,13 +71,23 @@ function App() {
         mainApi.getInitialCards()
           .then(function(res){
             const movie=[]
-            res.forEach(element => {
-              // alert(JSON.stringify(element))
-              // if(element.owner === currentUser._id)
-              movie.push(prepareSavedMovies(element))
-            })
+
+            if(localStorage.getItem('searchSavedMoviesArray')){
+              JSON.parse(localStorage.getItem('searchSavedMoviesArray')).forEach(element => {
+                movie.push(prepareSavedMovies(element))
+              })
+            }else{
+              res.forEach(element => {
+                movie.push(prepareSavedMovies(element))
+              })
+            }
             setSavedMovies(movie) 
             })
+            // res.forEach(element => {
+            //   movie.push(prepareSavedMovies(element))
+            // })
+            // setSavedMovies(movie) 
+            // })
           .catch((err) => {
             console.log(err); 
           });
@@ -86,19 +97,25 @@ function App() {
         moviesApi.getInitialCards()
           .then(function(res){
             const movie=[]
-            res.forEach(element => {
-              movie.push(prepareMovies(element))
-            })
+            
+            if(localStorage.getItem('searchMoviesArray')){
+              JSON.parse(localStorage.getItem('searchMoviesArray')).forEach(element => {
+                movie.push(prepareMovies(element))
+              })
+            }else{
+              res.forEach(element => {
+                movie.push(prepareMovies(element))
+              })
+            }
             setMovies(movie) 
             })
           .catch((err) => {
             console.log(err); 
           });
-      }      
+      }
+      
+     
   }, [null])
-
-
-
   
   function onRegisterClick(){
     history.push('/sign-up');
@@ -122,6 +139,7 @@ function App() {
   }
   function onLogOutClick(){
     delete localStorage.token;
+    delete localStorage.loggIn;
     history.push('/');
     history.go();
   }
@@ -150,7 +168,7 @@ function App() {
       auth.getContent(token).then((res) => {
         if (res){
           setLoggedIn(true)
-          
+          localStorage.setItem('loggIn',true);
         };
       })
       .catch((err) => {
@@ -162,7 +180,8 @@ function App() {
   function handleUpdateUser(name, email) {
     mainApi.postLoginToServer(name, email)
       .then((updatedUser)=>{
-        alert('Профиль успешно обновлен! Привет, '+ updatedUser.data);
+        alert('Профиль успешно обновлен! Привет, '+ updatedUser.data.name);
+        setCurrentUser({name:updatedUser.data.name,_id:updatedUser.data._id,email:updatedUser.data.email})
       })
       .catch((err) => {
         console.log(err); 
@@ -204,11 +223,16 @@ function App() {
 
   function handleApploadCard(data) {
 
-    mainApi.postCardToServer(data)  
+    mainApi.postCardToServer(data) 
+      .then((res) => {
+        const a = savedMovies;
+        a.push(res.data)
+        setSavedMovies(a);
+      }) 
       .catch((err) => {
         console.log(err); 
       });
-      reMakeSavedMovies()
+      // reMakeSavedMovies()
   }
 
   function handleCardDelete(card) {
@@ -223,10 +247,15 @@ function App() {
   } 
 
   function searchMovie(text) {
-    const newCards = movies.filter((c) => c.nameRU === text);
-    setMovies(newCards);
+    if (text === ''){
+      delete localStorage.searchMoviesArray
+      reMakeMovies();
+    } else {
+      const newCards = movies.filter((c) => c.nameRU.toLowerCase().includes(text.toLowerCase()));
+      setMovies(newCards);
+      localStorage.setItem('searchMoviesArray',JSON.stringify(newCards))
+    }
   }
-
 
   function showShortMeterMovies(){
     const newCards = movies.filter((c) => c.duration <= 40);
@@ -248,8 +277,14 @@ function App() {
   }
 
   function searchSavedMovie(text) {
-    const newCards = savedMovies.filter((c) => c.nameRU === text);
-    setSavedMovies(newCards);
+    if (text === ''){
+      delete localStorage.searchSavedMoviesArray
+      reMakeSavedMovies();
+    } else {
+      const newCards = savedMovies.filter((c) => c.nameRU.toLowerCase().includes(text.toLowerCase()));
+      setSavedMovies(newCards);
+      localStorage.setItem('searchSavedMoviesArray',JSON.stringify(newCards))
+    }
   }
 
   function showShortMeterSavedMovies(){
@@ -270,58 +305,119 @@ function App() {
         console.log(err); 
       });
   }
+
+
+
+  const hasInvalidInput = (inputList) => {
+    return inputList.some((inputElement) => {
+      return !inputElement.validity.valid;
+    })
+  };
+
+  const toggleButtonState = (inputList, buttonElement) => {
+    if (hasInvalidInput(inputList)) {
+      buttonElement.classList.add('form__submit_inactive');
+      buttonElement.disabled = true;
+    } else {
+      buttonElement.classList.remove('form__submit_inactive');
+      buttonElement.disabled = false;
+    }
+  }; 
+
+  const showInputError = (formElement, inputElement, errorMessage) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add('form__input_type_error');
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add('form__input-error_active');
+  };
+  
+  const hideInputError = (formElement, inputElement) => {
+    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove('form__input_type_error');
+    errorElement.classList.remove('form__input-error_active');
+    errorElement.textContent = '';
+  }; 
+  
+  const isValid = (formElement, inputElement) => {
+    if (!inputElement.validity.valid) {
+      showInputError(formElement, inputElement, inputElement.validationMessage);
+    } else {
+      hideInputError(formElement, inputElement);
+    }
+  }; 
+
+  const setEventListeners = (formElement) => {
+    const inputList = Array.from(formElement.querySelectorAll(`.form__input`));
+    const buttonElement = formElement.querySelector('.form__submit');
+    toggleButtonState(inputList, buttonElement);
+    inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', () => {
+        isValid(formElement, inputElement);
+        toggleButtonState(inputList, buttonElement);
+      });
+    });
+  }; 
+
+  const enableValidation = () => {
+    const formList = Array.from(document.querySelectorAll('.form'));
+    formList.forEach((formElement) => {
+      formElement.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+      });
+      setEventListeners(formElement);
+    });
+  };
+
+  enableValidation(); 
+
   return (
-    <div className="App">
-        <div className='prePreloader'>
-          <div className="preloader">
-              <div className="preloader__container">
-                  <span className="preloader__round"></span>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="App">
+          <div className='prePreloader'>
+            <div className="preloader">
+                <div className="preloader__container">
+                    <span className="preloader__round"></span>
+                </div>
+            </div>
+          </div>
+          <Header isLoginOrRegister={isLoginOrRegister} isLoggedMain={isLoggedMain} isMain={isMain} isMovie={isMovie} isSavedMovie={isSavedMovie} isMovieOrProfile={isMovieOrProfile} onRegisterClick={onRegisterClick} onLoginClick={onLoginClick} onMoviesClick={onMoviesClick} onSavedMoviesClick={onSavedMoviesClick} onProfileClick={onProfileClick} setIsPopupOpen={setIsPopupOpen}/>
+          <Switch>
+            <Route path="/sign-up">
+              <Register setEventListeners={setEventListeners} setIsLoggedMain={setIsLoggedMain} onLoginClick={onLoginClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleRegister={handleRegister} />
+            </Route>
+            <Route path="/sign-in">
+              < Login onRegisterClick={onRegisterClick} setIsLoggedMain={setIsLoggedMain} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleLogin={handleLogin} />
+            </Route>
+            <ProtectedRoute path="/movies" loggedIn={loggedIn} 
+              component={()=>(<MoviesCardList setSavedMovies={setSavedMovies} setIsLoggedMain={setIsLoggedMain} savedMovies={savedMovies} setMovies={setMovies} reMakeMovies={reMakeMovies} movies={movies} showShortMeter={showShortMeterMovies} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleApploadCard={handleApploadCard} handleCardDelete={handleCardDelete} searchMovie={searchMovie}/>)} />
+            <ProtectedRoute path="/saved-movies" loggedIn={loggedIn} 
+              component={()=>(<SavedMoviesCardList setIsLoggedMain={setIsLoggedMain} reMakeSavedMovies={reMakeSavedMovies} showShortMeter={showShortMeterSavedMovies} searchSavedMovie={searchSavedMovie} movies={savedMovies}setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleCardDelete={handleCardDelete} />)} />
+            <ProtectedRoute path="/profile" loggedIn={loggedIn} 
+              component={()=>(<Profile onLogOutClick={onLogOutClick} setIsLoggedMain={setIsLoggedMain} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleUpdateUser={handleUpdateUser} />)} />
+            <Route exact path="/">
+              <Main setIsMain={setIsMain} setIsLoggedMain={setIsLoggedMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} />
+            </Route>
+            <Route path="*">
+              <NotFound onNotFound={onNotFound} setIsLoggedMain={setIsLoggedMain} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} />
+            </Route>
+        
+          </Switch>
+          <Footer />
+          <div className={`popup ${isPopupOpen?'popup_visible':''} `}>
+            <div className='popup__field'>
+              <div className="popup__buttonField">
+                <button className='popup__buttonClose' onClick={closePopup}><img className='popup__closeImg' src={close} alt='Закрыть' /></button> 
               </div>
-          </div>
-        </div>
-        <Header isLoginOrRegister={isLoginOrRegister} isMain={isMain} isMovie={isMovie} isSavedMovie={isSavedMovie} isMovieOrProfile={isMovieOrProfile} onRegisterClick={onRegisterClick} onLoginClick={onLoginClick} onMoviesClick={onMoviesClick} onSavedMoviesClick={onSavedMoviesClick} onProfileClick={onProfileClick} setIsPopupOpen={setIsPopupOpen}/>
-        <Switch>
-          <Route path="/sign-up">
-            <Register onLoginClick={onLoginClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleRegister={handleRegister} />
-          </Route>
-          <Route path="/sign-in">
-            < Login onRegisterClick={onRegisterClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleLogin={handleLogin} />
-          </Route>
-          <ProtectedRoute path="/movies" loggedIn={loggedIn} 
-            component={()=>(<MoviesCardList savedMovies={savedMovies} setMovies={setMovies} reMakeMovies={reMakeMovies} movies={movies} showShortMeter={showShortMeterMovies} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleApploadCard={handleApploadCard} handleCardDelete={handleCardDelete} searchMovie={searchMovie}/>)} />
-          <ProtectedRoute path="/saved-movies" loggedIn={loggedIn} 
-            component={()=>(<SavedMoviesCardList reMakeSavedMovies={reMakeSavedMovies} showShortMeter={showShortMeterSavedMovies} searchSavedMovie={searchSavedMovie} movies={savedMovies}setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleCardDelete={handleCardDelete} />)} />
-          {/* <Route path="/saved-movies">
-            <SavedMoviesCardList movies={savedMovies}setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleCardDelete={handleCardDelete} />
-          </Route> */}
-          <ProtectedRoute path="/profile" loggedIn={loggedIn} 
-            component={()=>(<Profile onLogOutClick={onLogOutClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleUpdateUser={handleUpdateUser} />)} />
-          {/* <Route path="/profile">
-            <Profile onLogOutClick={onLogOutClick} setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} handleUpdateUser={handleUpdateUser} />
-          </Route> */}
-          <Route exact path="/">
-            <Main setIsMain={setIsMain} setIsSavedMovie={setIsSavedMovie} setIsMovie={setIsMovie} setIsProfile={setIsProfile} />
-          </Route>
-          <Route path="*">
-            <NotFound onNotFound={onNotFound} setIsMain={setIsMain}  />
-          </Route>
-      
-        </Switch>
-        <Footer />
-        <div className={`popup ${isPopupOpen?'popup_visible':''} `}>
-          <div className='popup__field'>
-            <div className="popup__buttonField">
-              <button className='popup__buttonClose' onClick={closePopup}><img className='popup__closeImg' src={close} alt='Закрыть' /></button> 
+              <div className='popup__container'>
+                <button id="utton" type='button' onClick={onLogOutClick} className={`popup__button ${isMain?'popup__button_highlighted':''}`}> Главная </button>
+                <button id="utton" type='button' onClick={onMoviesClick} className={`popup__button ${isMovie?'popup__button_highlighted':''}`}> Фильмы </button>
+                <button id="utton" type='button' onClick={onSavedMoviesClick} className={`popup__button ${isSavedMovie?'popup__button_highlighted':''}`}> Сохраненные фильмы</button>
+              </div>
+              <button id="utton" type='button' onClick={onProfileClick} className="popup__button popup__button_account"> Аккаунт <img className="header__accountArt" src={account} alt="Аккаунт"/></button>
             </div>
-            <div className='popup__container'>
-              <button id="utton" type='button' onClick={onLogOutClick} className={`popup__button ${isMain?'popup__button_highlighted':''}`}> Главная </button>
-              <button id="utton" type='button' onClick={onMoviesClick} className={`popup__button ${isMovie?'popup__button_highlighted':''}`}> Фильмы </button>
-              <button id="utton" type='button' onClick={onSavedMoviesClick} className={`popup__button ${isSavedMovie?'popup__button_highlighted':''}`}> Сохраненные фильмы</button>
-            </div>
-            <button id="utton" type='button' onClick={onProfileClick} className="popup__button popup__button_account"> Аккаунт <img className="header__accountArt" src={account} alt="Аккаунт"/></button>
           </div>
-        </div>
-    </div>
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

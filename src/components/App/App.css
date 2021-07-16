@@ -217,3 +217,10 @@
   animation: preloader-inside-red 1s ease-in-out infinite;
 }
 
+.form__input_type_error {
+  border-bottom-color: red;
+} 
+
+.form__submit_inactive{
+  background-color: lightslategrey;
+}

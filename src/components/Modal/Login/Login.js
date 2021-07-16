@@ -7,7 +7,7 @@ export default function Login (props) {
   props.setIsProfile(false);
   props.setIsSavedMovie(false);
   props.setIsMovie(false);
-
+  props.setIsLoggedMain(false)
   function handleSubmit(e){
     e.preventDefault();
     const email = document.getElementById('email').value;
@@ -23,11 +23,13 @@ export default function Login (props) {
       <p className="login__welcome">
         Рады видеть!
       </p>
-      <form onSubmit={handleSubmit} className="login__form">
-        <input required id="email"  className="login__input" placeholder="E-mail" name="email" type="text" />
-        <input required id="password"  className="login__input" placeholder="Пароль" name="password" type="password" />
+      <form onSubmit={handleSubmit} className="form login__form">
+        <input required id="email"  className="form__input login__input" placeholder="E-mail" name="email" type="email" />
+        <span class="email-error form__input-error"></span>
+        <input required id="password"  className="form__input login__input" placeholder="Пароль" name="password" type="password" />
+        <span class="password-error form__input-error"></span>
         <div className="login__button-container">
-          <button type="submit" className="login__button">Войти</button>
+          <button type="submit" className="form__submit login__button">Войти</button>
         </div>
       </form>
       <div className="login__signup">

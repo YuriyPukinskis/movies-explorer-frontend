@@ -2,21 +2,30 @@ import React from 'react';
 import MovieCard from '../MoviesCard/MovieCard';
 import icon from '../../../images/icon.png'
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function MoviesCardList( props) {
   props.setIsMain(false);
   props.setIsProfile(false);
   props.setIsSavedMovie(true);
   props.setIsMovie(false);
-
+  props.setIsLoggedMain(false)
   const[visible,setVisibe]=useState(3)
-  const[hidden,setHidden]=useState(false)
+  
+  const[hidden,setHidden]=useState(false);
+  
   function handleSearch() {
     const text = document.getElementById('movie').value;
     props.searchSavedMovie(text)
+    localStorage.setItem('searchSavedMovieField',text)
   }
 
-
+  useEffect(() => {
+    if (localStorage.getItem('searchSavedMovieField')){
+      document.getElementById('movie').value = localStorage.getItem('searchSavedMovieField');
+    }   
+  }, [null])
+  
   function handleCheck(e){ 
     if(document.getElementById("check").checked){
       props.showShortMeter();
@@ -28,7 +37,7 @@ export default function MoviesCardList( props) {
 
   function clickHandle(){
     setVisibe(visible+3);
-    if(visible>=100){
+    if(visible>=props.movies.length){
       setHidden(true)
     }
   }
@@ -60,8 +69,8 @@ export default function MoviesCardList( props) {
             )
           }).slice(0, visible)}
         </section>  
-      :''}
-      <button className={`savedMovies__button ${hidden?'savedMovies__button_hidden':''}`} onClick={clickHandle}>Еще</button>
+      :<p className='savedMovies__none'>Ничего не найдено</p>}
+      <button className={`savedMovies__button ${((props.movies.length<=3)||hidden)?'savedMovies__button_hidden':''}`} onClick={clickHandle}>Еще</button>
     </div>
   );
 }

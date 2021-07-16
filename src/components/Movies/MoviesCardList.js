@@ -2,20 +2,34 @@ import React from 'react';
 import MovieCard from './MovieCard';
 import icon from '../../images/icon.png'
 import { useState } from 'react';
+import {VIS_1280,VIS_768} from '../../utils/consts';
+import { useEffect } from 'react';
 
 export default function MoviesCardList( props) {
   props.setIsMain(false);
   props.setIsProfile(false);
   props.setIsSavedMovie(false);
   props.setIsMovie(true);
-
+  props.setIsLoggedMain(false)
   const[visible,setVisibe]=useState(3)
   const[hidden,setHidden]=useState(false)
+
+  useEffect(() => {
+    if (localStorage.getItem('searchMovieField')){
+      document.getElementById('movie').value = localStorage.getItem('searchMovieField');
+    }   
+  }, [null])
+  
   function handleSearch() {
     const text = document.getElementById('movie').value;
-    props.searchMovie(text)
+    
+    // if (text === ''){
+    //   props.reMakeMovies();
+    // } else {
+      props.searchMovie(text)
+    // }
+    localStorage.setItem('searchMovieField',text)
   }
-
 
   function handleCheck(e){ 
     if(document.getElementById("check").checked){
@@ -27,8 +41,12 @@ export default function MoviesCardList( props) {
   }
 
   function clickHandle(){
-    setVisibe(visible+3);
-    if(visible>=100){
+    if(document.documentElement.clientWidth<=768){
+      setVisibe(visible+VIS_768);
+    } else {
+      setVisibe(visible+VIS_1280);
+    }
+    if(visible>=props.movies.length){
       setHidden(true)
     }
   }
@@ -56,12 +74,12 @@ export default function MoviesCardList( props) {
         <section className="elements">
           {Array.prototype.map.call(props.movies, function(item,index){
             return(
-              <MovieCard savedMovies={props.savedMovies} key={item.movieId} movie={item} myId={props.myId} handleApploadCard={props.handleApploadCard} handleCardDelete={props.handleCardDelete} />
+              <MovieCard setSavedMovies={props.setSavedMovies} savedMovies={props.savedMovies} key={item.movieId} movie={item} myId={props.myId} handleApploadCard={props.handleApploadCard} handleCardDelete={props.handleCardDelete} />
             )
           }).slice(0, visible)}
         </section>  
-      :''}
-      <button className={`movies__button ${hidden?'movies__button_hidden':''}`} onClick={clickHandle}>Еще</button>
+      :<p className='movies__none'>Ничего не найдено</p>}
+      <button className={`movies__button ${((props.movies.length<=3)||hidden)?'movies__button_hidden':''}`} onClick={clickHandle}>Еще</button>
     </div>
   );
 }

@@ -1,19 +1,32 @@
-# Заголовок
-Диплом. Сохранение фильмов в избранное.
+# Диплом. Сохранение фильмов в избранное.
 
-# Описание
+## Описание
 Фронт-энд проекта, в рамках которого с сервера загружается набор карточек, после чего по нажатию кнопки карточка добавляется в личный кабинет каждого конкретного пользователя
 
-# Стек
+## Стек
 HTML CSS JavaScript
+* Серверная разработка
+* Запросы к серверу
+* Адаптивная вёрстка
+* Вёрстка попапа
+* Работа с формами
+* Валидация форм
+* Работа с массивами
+* Работа с объектами
+* Создание классa Api для передачи/получения информации с сервера
 
-# Инструкция по развёртыванию и системные требования
+## Инструкция по развёртыванию и системные требования
 HTML5 CSS3 JavaScript1.8 
+Для запуска проекта необходимо:
+1) Скачать архив с файлми прокта
+2) Разархивировать его
+3) Перейти в соответствующую директорию
+4) Установить зависимости
+5) Запустить приложение
 
-# Статус
-В работе. Осталось вынести в константы количество выводимых карточек в сохраненных фильмах
+Полный список команд для взаимодействия с проектом приведен в файле ***package.json***
 
-# Getting Started with Create React App
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -83,3 +96,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Статус
+![#1589F0](https://via.placeholder.com/15/1589F0/000000?text=+) **'В работе. Осталось вынести в константы количество выводимых карточек в сохраненных фильмах'**
